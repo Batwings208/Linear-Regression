@@ -9,7 +9,7 @@ import pickle
 
 style.use("ggplot")
 
-data = pd.read_csv("/Users/godseye/Coding/PythonProjects/MainProjects/AI/student-mat.csv", sep=";")
+data = pd.read_csv("student-mat.csv", sep=";")
 
 predict = "G3"
 
@@ -22,7 +22,7 @@ x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y
 
 
 
-best = 98
+best = 90 #change to your acc, do not do something impossible like 100
 for _ in range(500):
     
     x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size=0.8)
@@ -32,7 +32,8 @@ for _ in range(500):
     linear.fit(x_train, y_train)
     acc = linear.score(x_test, y_test)
     print("Accuracy: " + str(acc.round(3)*100))
-
+    
+    
     if acc > best:
         best = acc
         with open("studentgrades.pickle", "wb") as f:
@@ -49,4 +50,4 @@ for x in range(len(predicted)):
     print(predicted[x].round(4), x_test[x].round(4), y_test[x].round(4))
 
 
-print(best)
+print(best) #if 90 its not actually getting 90, set the best to your desired accuracy so it can save it
